@@ -5,21 +5,22 @@
 <body>
 <div class="container">
 
-<h1 class="form__title">Login</h1>
+    <h1 class="form__title">Login</h1>
     <% if (messages.error) { %>
         <div class="error"><%= messages.error %></div>
     <% } %>
-<form action="/login" method="POST">
-    <div class="form__input-group">
-        <label for="email"></label>
-        <input type="email" class="form__input" autofocus placeholder="E-mail" id="email" name="email" required>
-    </div>
-    <div class="form__input-group">
-        <label for="password"></label>
-        <input type="password" class="form__input" autofocus placeholder="Password" id="password" name="password" required>
-    </div>
-    <button class="form__button" type="submit">Login</button>
-</form>
-<a class="form__link" href="/register">Don't have an account? Sign up</a>
+    <form action="/login" method="POST">
+        <div class="form__input-group">
+            <label for="email"></label>
+            <input type="email" class="form__input" autofocus placeholder="E-mail" id="email" name="email" required>
+        </div>
+        <div class="form__input-group">
+            <label for="password"></label>
+            <input type="password" class="form__input" autofocus placeholder="Password" id="password" name="password"
+                   required>
+        </div>
+        <button class="form__button" type="submit">Login</button>
+    </form>
+    <a class="form__link" href="/register">Don't have an account? Sign up</a>
 </div>
 </body>

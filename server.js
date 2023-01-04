@@ -13,20 +13,25 @@ const session = require('express-session')
 const methodOverride = require('method-override')
 const initializePassport = require('./passport-config')
 const nodemailer = require('nodemailer');
+const fs = require('fs');
 
+dotenv.config({path: './.env'})
 
-
-dotenv.config({ path: './.env'})
 
 const connection = mysql.createConnection({
     host: process.env.DATABASE_HOST,
     user: process.env.DATABASE_ROOT,
     password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE
+    database: process.env.DATABASE,
+    port: process.env.PORT,
+    ssl: {
+        ca: fs.readFileSync("DigiCertGlobalRootCA.crt.pem")
+    },
+    rejectUnauthorized: true
 })
 
 connection.connect((error) => {
-    if(error) {
+    if (error) {
         console.log(error)
     } else {
         console.log('mysql connected!')
@@ -89,7 +94,7 @@ app.use(passport.session())
 app.use(express.static(__dirname + '/'));
 
 app.set('view engine', 'ejs')
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 app.use(flash())
 app.use(session({
@@ -101,13 +106,13 @@ app.use(session({
 app.use(methodOverride('_method'))
 
 app.get('/', checkAuthenticated, (req, res) => {
-    res.render('index.ejs', { name: req.user.name })
+    res.render('index.ejs', {name: req.user.name})
 })
 
 app.get('/', checkAuthenticated, (req, res) => {
     console.log('Request object:', req);
     console.log('User name:', req.user.name);
-    res.render('index.ejs', { name: req.user.name })
+    res.render('index.ejs', {name: req.user.name})
 })
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
@@ -141,12 +146,12 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
 
 
 app.post('/register', (req, res) => {
-    const { name, email, password } = req.body;
+    const {name, email, password} = req.body;
 
     bcrypt.hash(password, 10, (error, hash) => {
         if (error) {
             // Handle error
-            return res.render('register', { message: 'Error hashing password' });
+            return res.render('register', {message: 'Error hashing password'});
         }
 
         const sql = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)';
@@ -156,15 +161,15 @@ app.post('/register', (req, res) => {
             if (error) {
                 // Check for duplicate email error
                 if (error.code === 'ER_DUP_ENTRY') {
-                    return res.render('register', { message: 'Email is already registered' });
+                    return res.render('register', {message: 'Email is already registered'});
                 }
 
                 // Handle other errors
-                return res.render('register', { message: 'Error adding user to database' });
+                return res.render('register', {message: 'Error adding user to database'});
             }
 
             // User successfully added to database
-            return res.render('register', { message: 'User registered successfully' });
+            return res.render('register', {message: 'User registered successfully'});
         });
     });
 });
@@ -194,11 +199,11 @@ function checkNotAuthenticated(req, res, next) {
 }
 
 app.get('/orders', checkAuthenticated, (req, res) => {
-    res.render('orders', { name: req.user.name });
+    res.render('orders', {name: req.user.name});
 });
 
 app.get('/about', checkAuthenticated, (req, res) => {
-    res.render('about', { name: req.user.name });
+    res.render('about', {name: req.user.name});
 });
 
 
@@ -291,7 +296,7 @@ app.get('/myorders', checkAuthenticated, (req, res) => {
             res.send('Error fetching orders');
         } else {
             // Render the orders page, passing in the orders as a variable
-            res.render('myorders', { myorders: results });
+            res.render('myorders', {myorders: results});
         }
     });
 });
@@ -325,7 +330,7 @@ app.get('/admin', checkAuthenticated, (req, res) => {
                 res.send('Error retrieving orders');
             } else {
                 // Render the admin page with the orders data
-                res.render('admin', { user, orders });
+                res.render('admin', {user, orders});
             }
         });
     } else {
@@ -333,7 +338,6 @@ app.get('/admin', checkAuthenticated, (req, res) => {
         res.redirect('/');  // Redirect to the home page
     }
 });
-
 
 
 app.post('/admin/cancel', (req, res) => {
@@ -352,11 +356,10 @@ app.post('/admin/cancel', (req, res) => {
 });
 
 
-
 app.get('/myprofile', checkAuthenticated, (req, res) => {
 
     const user = req.user;
-    res.render('myprofile', { user });
+    res.render('myprofile', {user});
 
 });
 
@@ -366,13 +369,13 @@ app.post('/myprofile', (req, res) => {
 
 
 // Get the updated values from the form
-    const { name, email, password } = req.body;
+    const {name, email, password} = req.body;
 
 // Hash the new password
     bcrypt.hash(password, 10, (error, hash) => {
         if (error) {
             // Handle error
-            return res.render('myprofile', { message: 'Error updating profile' });
+            return res.render('myprofile', {message: 'Error updating profile'});
         }
 
         // Update the user's information in the database
@@ -381,7 +384,7 @@ app.post('/myprofile', (req, res) => {
         connection.query(sql, values, (error, result) => {
             if (error) {
                 // Handle error
-                return res.render('myprofile', { message: 'Error updating profile' });
+                return res.render('myprofile', {message: 'Error updating profile'});
             }
 
             // Update the user object with the new values
@@ -389,12 +392,10 @@ app.post('/myprofile', (req, res) => {
             user.email = email;
 
             // Profile updated successfully
-            return res.render('myprofile', { message: 'Profile updated successfully', user });
+            return res.render('myprofile', {message: 'Profile updated successfully', user});
         });
     });
 });
-
-
 
 
 app.listen(3000)

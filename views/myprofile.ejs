@@ -23,21 +23,22 @@
 
 </header>
 <div class="container1">
-<form action="/myprofile" method="POST">
-    <div class="form__input-group">
-        <label for="name">Name:</label>
-        <input type="text" class="form__input" value="<%= user.name %>" id="name" name="name" required>
-    </div>
-    <div class="form__input-group">
-        <label for="email">Email:</label>
-        <input type="email" class="form__input" value="<%= user.email %>" id="email" name="email" required>
-    </div>
-    <div class="form__input-group">
-        <label for="password">Password:</label>
-        <input type="password" class="form__input" placeholder="Leave blank to keep current password" id="password" name="password">
-    </div>
-    <button class="form__button" type="submit">Update</button>
-</form>
+    <form action="/myprofile" method="POST">
+        <div class="form__input-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form__input" value="<%= user.name %>" id="name" name="name" required>
+        </div>
+        <div class="form__input-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form__input" value="<%= user.email %>" id="email" name="email" required>
+        </div>
+        <div class="form__input-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form__input" placeholder="Leave blank to keep current password" id="password"
+                   name="password">
+        </div>
+        <button class="form__button" type="submit">Update</button>
+    </form>
 </div>
 
 </body>

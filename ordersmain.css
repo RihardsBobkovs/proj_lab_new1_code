@@ -37,14 +37,15 @@ header {
     padding: 0px 20px;
 }
 
-.nav-links li a{
+.nav-links li a {
     transition: all 0.3s ease 0s;
 
 }
 
-.nav-links li a:hover{
+.nav-links li a:hover {
     color: #99aab5;
 }
+
 button {
     padding: 6px 20px;
     background-color: rgb(32, 32, 37);
@@ -55,6 +56,7 @@ button {
     display: block;
     margin: 0 auto;
 }
+
 button:hover {
     background-color: rgba(110, 78, 154, 0.8);
 }
@@ -133,11 +135,12 @@ h1 {
     color: #7289da;
     font-family: "Oswald", sans-serif;
 }
-.form__option{
+
+.form__option {
     color: #7289da;
 }
 
-.form__select{
+.form__select {
     font-family: "Oswald", sans-serif;
     display: block;
     width: 110%;
