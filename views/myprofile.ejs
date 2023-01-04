@@ -1,0 +1,43 @@
+<head>
+    <title>Home</title>
+    <link href="main2.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<header>
+    <img class="logo" src="icons8-label-printer-96.png" alt="logo">
+    <nav>
+        <ul class="nav-links">
+
+            <li><a href="/">Home</a></li>
+            <li><a href="/orders">Orders</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/myorders">My Orders</a></li>
+            <li><a href="/myprofile">My Profile</a></li>
+        </ul>
+    </nav>
+
+    <form action="/logout?_method=DELETE" method="POST">
+        <button type="submit">Log Out</button>
+    </form>
+
+</header>
+<div class="container1">
+<form action="/myprofile" method="POST">
+    <div class="form__input-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form__input" value="<%= user.name %>" id="name" name="name" required>
+    </div>
+    <div class="form__input-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form__input" value="<%= user.email %>" id="email" name="email" required>
+    </div>
+    <div class="form__input-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form__input" placeholder="Leave blank to keep current password" id="password" name="password">
+    </div>
+    <button class="form__button" type="submit">Update</button>
+</form>
+</div>
+
+</body>

@@ -1,0 +1,51 @@
+<head>
+    <title>Home</title>
+    <link href="main2.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<header>
+    <img class="logo" src="icons8-label-printer-96.png" alt="logo">
+    <nav>
+        <ul class="nav-links">
+
+            <li><a href="/">Home</a></li>
+            <li><a href="/orders">Orders</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/myorders">My Orders</a></li>
+            <li><a href="/myprofile">My Profile</a></li>
+        </ul>
+    </nav>
+
+    <form action="/logout?_method=DELETE" method="POST">
+        <button type="submit">Log Out</button>
+    </form>
+
+</header>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Book Cover</th>
+        <th>Page Amount</th>
+        <th>Paper Type</th>
+        <th>Book Quantity</th>
+        <th></th>
+    </tr>
+    <% myorders.forEach((order) => { %>
+        <tr>
+            <td><%= order.id %></td>
+            <td><%= order.book_cover %></td>
+            <td><%= order.page_amount %></td>
+            <td><%= order.paper_type %></td>
+            <td><%= order.book_quantity %></td>
+            <td>
+                <form action="/orders/cancel" method="POST">
+                    <button type="submit" name="cancel-order" value="<%= order.id %>">Cancel Order</button>
+                </form>
+            </td>
+        </tr>
+    <% }); %>
+</table>
+
+</body>

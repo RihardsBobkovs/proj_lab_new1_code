@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #2c2f33;
+
+}
+
+li, a, button {
+    font-family: "Oswald", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: #7289da;
+    text-decoration: none;
+
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+}
+
+.logo {
+    cursor: pointer;
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-links li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav-links li a{
+    transition: all 0.3s ease 0s;
+
+}
+
+.nav-links li a:hover{
+    color: #99aab5;
+}
+button {
+    padding: 6px 20px;
+    background-color: rgb(32, 32, 37);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    display: block;
+    margin: 0 auto;
+}
+button:hover {
+    background-color: rgba(110, 78, 154, 0.8);
+}
+
+h1 {
+    font-family: "Oswald", sans-serif;
+    font-weight: 500;
+    font-size: 26px;
+    color: #7289da;
+    text-decoration: none;
+}
+
+.form__input {
+    display: block;
+    width: 110%;
+    padding: 0.75rem;
+    box-sizing: border-box;
+
+    border: 1px solid #7289da;
+    outline: none;
+    background: #2c2f33;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.form__input:focus {
+    border-color: #23272a;
+    background: #99aab5;
+}
+
+.form__input,
+.form__button {
+    font: 500 1rem 'Quicksand', sans-serif;
+}
+
+.form__input-group {
+    margin-bottom: 1rem;
+
+}
+
+.form__button {
+    width: 100%;
+    padding: 1rem 2rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    background: #2c2f33;
+
+}
+
+.container1 {
+
+    align-items: center;
+    width: 500px;
+    max-width: 500px;
+
+    padding: 2rem;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+
+
+    height: 120vh;
+    display: flex;
+
+    justify-content: center;
+    font-size: 18px;
+
+    background-size: cover;
+    margin: auto;
+}
+
+.form__label {
+    color: #7289da;
+    font-family: "Oswald", sans-serif;
+}
+.form__option{
+    color: #7289da;
+}
+
+.form__select{
+    font-family: "Oswald", sans-serif;
+    display: block;
+    width: 110%;
+    padding: 0.30rem;
+    box-sizing: border-box;
+    border: 1px solid #7289da;
+    font-size: 20px;
+}
+
+.form__select option {
+    color: #7289da;
+}
