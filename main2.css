@@ -213,7 +213,7 @@ table {
     width: 50%;
     overflow-x: auto;
     margin: 0 auto;
-
+    margin-bottom: 150px;
 }
 
 td {
