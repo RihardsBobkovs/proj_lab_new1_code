@@ -14,6 +14,7 @@ const methodOverride = require('method-override')
 const initializePassport = require('./passport-config')
 const nodemailer = require('nodemailer');
 const fs = require('fs');
+const PORT = process.env.PORT || 3000;
 
 dotenv.config({path: './.env'})
 
@@ -398,4 +399,6 @@ app.post('/myprofile', (req, res) => {
 });
 
 
-app.listen(3000)
+app.listen(PORT, () => {
+    console.log(`server started on port ${PORT}`);
+});
