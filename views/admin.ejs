@@ -64,5 +64,29 @@
     <% } %>
 </table>
 
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Action</th>
+    </tr>
+    <% users.forEach((user) => { %>
+        <tr>
+            <td><%= user.ID %></td>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td>
+                <form action="/admin/delete-user" method="POST">
+                    <input type="hidden" name="userId" value="<%= user.ID %>">
+                    <button type="submit">Delete User</button>
+                </form>
+            </td>
+        </tr>
+    <% }); %>
+    <% if (locals.message) { %>
+        <p class="admin__message"><%= locals.message %></p>
+    <% } %>
+</table>
 
 </body>

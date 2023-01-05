@@ -319,22 +319,31 @@ app.post('/orders/cancel', (req, res) => {
 });
 
 app.get('/admin', checkAuthenticated, (req, res) => {
-    const user = req.user;  // Get the currently logged in user
-    if (user.is_admin === 1) {  // Check if the user is an admin
-        // Query the database for all orders
+    const user = req.user; // Get the currently logged in user
+    if (user.is_admin === 1) { // Check if the user is an admin
+// Query the database for all orders
         const sql = 'SELECT * FROM orders';
         connection.query(sql, (error, orders) => {
             if (error) {
-                // Handle error
+// Handle error
                 res.send('Error retrieving orders');
             } else {
-                // Render the admin page with the orders data
-                res.render('admin', {user, orders});
+// Query the database for all users
+                const sqlUsers = 'SELECT * FROM users';
+                connection.query(sqlUsers, (error, users) => {
+                    if (error) {
+// Handle error
+                        res.send('Error retrieving users');
+                    } else {
+// Render the admin page with the orders and users data
+                        res.render('admin', {user, orders, users});
+                    }
+                });
             }
         });
     } else {
-        // Redirect the user to a different page or show an error message
-        res.redirect('/');  // Redirect to the home page
+// Redirect the user to a different page or show an error message
+        res.redirect('/'); // Redirect to the home page
     }
 });
 
@@ -352,6 +361,29 @@ app.post('/admin/cancel', (req, res) => {
         // Order successfully cancelled
         return res.redirect('/admin?message=Order cancelled');
     });
+});
+
+
+app.post('/admin/delete-user', checkAuthenticated, (req, res) => {
+    const user = req.user;  // Get the currently logged in user
+    if (user.is_admin === 1) {  // Check if the user is an admin
+        // Get the user ID from the request body
+        const userId = req.body.userId;
+        // Delete the user from the database
+        const sql = 'DELETE FROM users WHERE id = ?';
+        connection.query(sql, [userId], (error) => {
+            if (error) {
+                // Handle error
+                res.send('Error deleting user');
+            } else {
+                // Redirect the user back to the /admin page
+                res.redirect('/admin');
+            }
+        });
+    } else {
+        // Redirect the user to a different page or show an error message
+        res.redirect('/');  // Redirect to the home page
+    }
 });
 
 
