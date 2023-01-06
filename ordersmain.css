@@ -69,9 +69,32 @@ button:hover {
 h1 {
     font-family: "Oswald", sans-serif;
     font-weight: 500;
-    font-size: 26px;
-    color: #7289da;
+    font-size: 20px;
+    color: #ee7752;
     text-decoration: none;
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+
+h2 {
+    font-family: "Oswald", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: #ee7752;
+    text-decoration: none;
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+h3 {
+    font-family: "Oswald", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: #ee7752;
+    text-decoration: none;
+    text-align: center;
+    padding-bottom: 30px;
 }
 
 .form__input {
