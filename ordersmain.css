@@ -43,7 +43,7 @@ header {
 }
 
 .nav-links li a:hover {
-    color: #99aab5;
+    color: #ee7752;
 }
 
 button {
@@ -58,7 +58,8 @@ button {
 }
 
 button:hover {
-    background-color: rgba(110, 78, 154, 0.8);
+    background-color: rgba(238, 119, 82, 0.4);
+    color: #ee7752;
 }
 
 h1 {
@@ -83,7 +84,7 @@ h1 {
 
 .form__input:focus {
     border-color: #23272a;
-    background: #99aab5;
+    background: #ee7752;
 }
 
 .form__input,
