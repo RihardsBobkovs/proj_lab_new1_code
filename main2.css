@@ -45,6 +45,10 @@ header {
     color: #ee7752;
 }
 
+.nav-links .active {
+    color: #ee7752;
+}
+
 button {
     padding: 6px 20px;
     background-color: rgb(32, 32, 37);

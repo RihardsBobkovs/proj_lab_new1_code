@@ -105,7 +105,8 @@ app.use(session({
 app.use(methodOverride('_method'))
 
 app.get('/', checkAuthenticated, (req, res) => {
-    res.render('index.ejs', {name: req.user.name})
+    const currentPath = req.path;
+    res.render('index.ejs', {name: req.user.name, currentPath})
 })
 
 app.get('/', checkAuthenticated, (req, res) => {
@@ -198,11 +199,13 @@ function checkNotAuthenticated(req, res, next) {
 }
 
 app.get('/orders', checkAuthenticated, (req, res) => {
-    res.render('orders', {name: req.user.name});
+    const currentPath = req.path;
+    res.render('orders', {name: req.user.name, currentPath});
 });
 
 app.get('/about', checkAuthenticated, (req, res) => {
-    res.render('about', {name: req.user.name});
+    const currentPath = req.path;
+    res.render('about', {name: req.user.name, currentPath});
 });
 
 
@@ -320,6 +323,7 @@ app.get('/alert', (req, res) => {
 })
 
 app.get('/myorders', checkAuthenticated, (req, res) => {
+    const currentPath = req.path;
     // Fetch the orders for the logged-in user
     const sql = 'SELECT * FROM orders WHERE user_id = ?';
     const values = [req.user.id];
@@ -331,7 +335,7 @@ app.get('/myorders', checkAuthenticated, (req, res) => {
             res.send('Error fetching orders');
         } else {
             // Render the orders page, passing in the orders as a variable
-            res.render('myorders', {myorders: results});
+            res.render('myorders', {myorders: results, currentPath});
         }
     });
 });
@@ -424,9 +428,9 @@ app.post('/admin/delete-user', checkAuthenticated, (req, res) => {
 
 
 app.get('/myprofile', checkAuthenticated, (req, res) => {
-
+    const currentPath = req.path;
     const user = req.user;
-    res.render('myprofile', {user});
+    res.render('myprofile', {user, currentPath});
 
 });
 

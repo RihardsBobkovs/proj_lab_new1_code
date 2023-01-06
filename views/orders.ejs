@@ -8,13 +8,11 @@
     <img class="logo" src="icons8-label-printer-96.png" alt="logo">
     <nav>
         <ul class="nav-links">
-
-            <li><a href="/">Home</a></li>
-            <li><a href="/orders">Order</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/myorders">My Orders</a></li>
-            <li><a href="/myprofile">My Profile</a></li>
-
+            <li><a class="<%= currentPath === '/' ? 'active' : '' %>" href="/">Home</a></li>
+            <li><a class="<%= currentPath === '/orders' ? 'active' : '' %>" href="/orders">Order</a></li>
+            <li><a class="<%= currentPath === '/about' ? 'active' : '' %>" href="/about">About</a></li>
+            <li><a class="<%= currentPath === '/myorders' ? 'active' : '' %>" href="/myorders">My Orders</a></li>
+            <li><a class="<%= currentPath === '/myprofile' ? 'active' : '' %>" href="/myprofile">My Profile</a></li>
         </ul>
     </nav>
 
