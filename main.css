@@ -4,7 +4,7 @@ body {
     --color-secondary: #23272a;
     --color-background: #99aab5;
     --color-error: #cc3333;
-    --color-success: #4bb544;
+    --color-success: #ee7752;
     --border-radius: 4px;
 
     margin: 0;
@@ -43,7 +43,7 @@ body {
     padding: 2rem;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
     border-radius: var(--border-radius);
-    background: #7289da;
+    background-color: rgba(114, 137, 218, 0.3);
 
 }
 
