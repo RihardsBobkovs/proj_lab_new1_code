@@ -291,3 +291,58 @@ form label {
     margin: 20px;
     background-color: #b0624f;
 }
+
+.about-us-cards1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card1 {
+    width: 350px;
+    height: 450px;
+    background-color: #b0624f;
+
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s;
+    margin: 25px;
+    margin-top: 60px;
+    border: 0px solid transparent;
+    box-shadow: 0 0 12px 4px rgba(0, 61, 255, 0.5);
+    animation: neon 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes neon {
+    to {
+        box-shadow: 0 0 12px 4px rgba(0, 255, 234, 0.5);
+    }
+}
+
+.card1:hover {
+    transform: scale(1.1);
+}
+
+.card1 img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card1 h3 {
+    font-family: "Oswald", sans-serif;
+    font-size: 25px;
+    color: #23272a;
+    background-color: #b0624f;
+    margin: 20px;
+    text-align: center;
+}
+
+.card1 p {
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    color: #23272a;
+    margin: 20px;
+    background-color: #b0624f;
+    text-align: center;
+}
