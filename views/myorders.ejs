@@ -30,6 +30,7 @@
         <th>Page Amount</th>
         <th>Paper Type</th>
         <th>Book Quantity</th>
+        <th>Total €</th>
         <th></th>
     </tr>
     <% myorders.forEach((order) => { %>
@@ -39,6 +40,7 @@
             <td><%= order.page_amount %></td>
             <td><%= order.paper_type %></td>
             <td><%= order.book_quantity %></td>
+            <td><%= order.price %></td>
             <td>
                 <form action="/orders/cancel" method="POST">
                     <button type="submit" name="cancel-order" value="<%= order.id %>">Cancel Order</button>

@@ -208,7 +208,39 @@ app.get('/about', checkAuthenticated, (req, res) => {
 
 app.post('/orders', (req, res) => {
     // handle form submission here
-    const sql = `INSERT INTO orders (user_id, name_surname, email, street_address, city, country, book_cover, page_amount, paper_type, book_quantity) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+
+    const pageAmount = req.body.page_amount;
+    const bookQuantity = req.body.book_quantity;
+    const bookCover = req.body.book_cover;
+    const paperType = req.body.paper_type;
+
+    let price = 0;
+
+// Set base price based on page amount
+    if (pageAmount <= 100) {
+        price = pageAmount * 0.1 * bookQuantity;
+    } else if (pageAmount <= 200) {
+        price = pageAmount * 0.09 * bookQuantity;
+    } else {
+        price = pageAmount * 0.08 * bookQuantity;
+    }
+
+// Add additional cost for hard cover book
+    if (bookCover === "hard_cover") {
+        price += 10 * bookQuantity;
+    }
+
+    if (bookCover === "soft_cover") {
+        price += 6 * bookQuantity;
+    }
+
+// Add additional cost for coated book paper
+    if (paperType === "coated_book_paper") {
+        price += 0.2 * pageAmount;
+    }
+
+
+    const sql = `INSERT INTO orders (user_id, name_surname, email, street_address, city, country, book_cover, page_amount, paper_type, book_quantity, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
     const values = [
         req.user.id,  // Set the user_id to the id of the currently logged-in user
         req.body.name_surname,
@@ -219,7 +251,8 @@ app.post('/orders', (req, res) => {
         req.body.book_cover,
         req.body.page_amount,
         req.body.paper_type,
-        req.body.book_quantity
+        req.body.book_quantity,
+        price
     ]
 
     connection.query(sql, values, (error, results) => {
@@ -244,6 +277,9 @@ app.post('/orders', (req, res) => {
                 subject: 'Order confirmation',
                 html: `
         <h1>Your order has been received and is being processed.</h1>
+        <h2>Your order total is ${price}€</h2>
+        <h2>Our IBAN: LVxxHABAxxxxxxxxxxxxxx</h2>
+        <h2>Make sure to specify your Name and Surname in the payment details</h2>
         <h2>Order Details:</h2>
         <p>Name/Surname: ${req.body.name_surname}</p>
         <p>Email: ${req.body.email}</p>
