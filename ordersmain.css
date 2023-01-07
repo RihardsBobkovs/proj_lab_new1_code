@@ -130,7 +130,7 @@ h3 {
 }
 
 .form__input-group {
-    margin-bottom: 7px;
+    margin-bottom: 1rem;
 
 }
 
@@ -159,7 +159,7 @@ h3 {
     border-radius: 20px;
 
 
-    height: 105vh;
+    height: 120vh;
     display: flex;
 
     justify-content: center;
