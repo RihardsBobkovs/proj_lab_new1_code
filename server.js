@@ -469,6 +469,12 @@ app.post('/myprofile', (req, res) => {
 });
 
 
+app.get('/products', checkAuthenticated, (req, res) => {
+    const currentPath = req.path;
+    res.render('products', {name: req.user.name, currentPath});
+});
+
+
 app.listen(PORT, () => {
     console.log(`server started on port ${PORT}`);
 });

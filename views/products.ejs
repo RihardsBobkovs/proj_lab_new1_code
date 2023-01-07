@@ -1,0 +1,76 @@
+<head>
+    <title>About</title>
+    <link href="main2.css" rel="stylesheet" type="text/css">
+    <link rel="icon" href="icons8-label-printer-96.png" type="image/png">
+</head>
+<body>
+<header>
+    <img class="logo" src="icons8-label-printer-96.png" alt="logo">
+    <nav>
+        <ul class="nav-links">
+            <li><a class="<%= currentPath === '/' ? 'active' : '' %>" href="/">Home</a></li>
+            <li><a class="<%= currentPath === '/products' ? 'active' : '' %>" href="/products">Products</a></li>
+            <li><a class="<%= currentPath === '/orders' ? 'active' : '' %>" href="/orders">Order</a></li>
+            <li><a class="<%= currentPath === '/myorders' ? 'active' : '' %>" href="/myorders">My Orders</a></li>
+            <li><a class="<%= currentPath === '/myprofile' ? 'active' : '' %>" href="/myprofile">My Profile</a></li>
+            <li><a class="<%= currentPath === '/about' ? 'active' : '' %>" href="/about">About</a></li>
+        </ul>
+    </nav>
+
+    <form action="/logout?_method=DELETE" method="POST">
+        <button type="submit">Log Out</button>
+    </form>
+</header>
+
+<h2>Our original products....</h2>
+
+<div class="about-us-cards2">
+    <div class="card2">
+        <img src="soft_paper.jpg" alt="Card image 1">
+        <h3>Book Paper</h3>
+        <p>Our book paper is a high-quality choice for all your printing needs.
+            It has a smooth finish that allows for crisp, clear text and vibrant colors.
+            Whether you're printing a novel, textbook, or workbook, our book paper will give you professional-grade
+            results every time.
+            Plus, it's durable and resistant to yellowing, ensuring your documents will remain vibrant and readable for
+            years to come.
+        </p>
+    </div>
+    <div class="card2">
+        <img src="coated_paper.png" alt="Card image 2">
+        <h3>Coated Book Paper</h3>
+        <p>Our coated book paper is perfect for printing high-quality books and publications.
+            The coating on the paper helps to improve the vibrancy and clarity of the printed text and images.
+            This paper is also durable, making it ideal for books that will be read and handled frequently.
+            Whether you are printing a novel or coffee table book, our coated paper is the perfect choice for
+            professional-looking results.
+        </p>
+    </div>
+</div>
+
+<div class="about-us-cards2">
+    <div class="card2">
+        <img src="soft_cover.jpg" alt="Card image 3">
+        <h3>Soft Covers</h3>
+        <p>Our soft book covers are made of high quality materials that provide a comfortable and enjoyable reading
+            experience.
+            The covers are durable and resistant to wear and tear, ensuring that your books stay in great condition for
+            a long time.
+            Whether you are a publisher, self-publisher, or just a book lover, our soft book covers are the perfect
+            choice for your needs.
+        </p>
+    </div>
+    <div class="card2">
+        <img src="hard_cover.jpg" alt="Card image 4">
+        <h3>Hard Covers</h3>
+        <p>
+            Our hard book covers are made with the highest quality materials to ensure durability and longevity.
+            They are the perfect choice for protecting your printed books and giving them a professional, polished look.
+            Plus, with our state-of-the-art printing technology, you can be sure that your hard cover will look good and
+            feel even better.
+        </p>
+    </div>
+</div>
+
+
+</body>
