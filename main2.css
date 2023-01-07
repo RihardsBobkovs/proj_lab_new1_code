@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
 
+:root {
+    --bg-color: #2c2f33;
+    --typewriterSpeed: 6s;
+    --typewriterCharacters: 25;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -355,4 +361,55 @@ form label {
     margin: 20px;
     background-color: #b0624f;
     text-align: center;
+}
+
+h2 {
+    font-size: clamp(1rem, 2vw + 1rem, 4rem);
+    position: relative;
+    font-family: "Source Code Pro", monospace;
+    width: max-content;
+    margin: auto;
+    margin-top: 30px;
+    color: #ee7752;
+}
+
+h2::before,
+h2::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+h2::before {
+    background: var(--bg-color);
+    animation: typewriter var(--typewriterSpeed) steps(var(--typewriterCharacters)) 1s forwards;
+}
+
+h2::after {
+    width: 0.125em;
+    background: #7289da;
+    animation: typewriter var(--typewriterSpeed) steps(var(--typewriterCharacters)) 1s forwards,
+    blink 750ms steps(var(--typewriterCharacters)) infinite;
+}
+
+@keyframes typewriter {
+    to {
+        left: 100%;
+    }
+}
+
+@keyframes blink {
+    to {
+        background: transparent;
+    }
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
