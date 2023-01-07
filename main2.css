@@ -16,6 +16,16 @@ li, a, button {
 
 }
 
+.nav-links li::before {
+    content: "";
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-color: #202025;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
 header {
     display: flex;
     justify-content: space-between;
