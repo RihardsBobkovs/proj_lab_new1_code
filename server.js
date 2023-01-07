@@ -221,7 +221,7 @@ app.post('/orders', (req, res) => {
 
 // Set base price based on page amount
     if (pageAmount <= 100) {
-        price = pageAmount * 0.7 * bookQuantity;
+        price = pageAmount * 0.07 * bookQuantity;
     } else if (pageAmount <= 200) {
         price = pageAmount * 0.06 * bookQuantity;
     } else {
