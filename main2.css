@@ -284,6 +284,10 @@ table tr:hover td:nth-child(12) {
     color: #ee7752
 }
 
+table tr:hover td:nth-child(13) {
+    color: #ee7752
+}
+
 td {
     font-size: 18px;
     font-family: "Oswald", sans-serif;

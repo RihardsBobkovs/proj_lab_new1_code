@@ -13,6 +13,7 @@ const session = require('express-session')
 const methodOverride = require('method-override')
 const initializePassport = require('./passport-config')
 const nodemailer = require('nodemailer');
+const solver = require('javascript-lp-solver');
 const fs = require('fs');
 const PORT = process.env.PORT || 3000;
 
@@ -360,29 +361,72 @@ app.post('/orders/cancel', (req, res) => {
 
 app.get('/admin', checkAuthenticated, (req, res) => {
     const user = req.user; // Get the currently logged in user
+
     if (user.is_admin === 1) { // Check if the user is an admin
-// Query the database for all orders
+        // Query the database for all orders
         const sql = 'SELECT * FROM orders';
         connection.query(sql, (error, orders) => {
             if (error) {
-// Handle error
+                // Handle error
                 res.send('Error retrieving orders');
             } else {
-// Query the database for all users
+                // Query the database for all users
                 const sqlUsers = 'SELECT * FROM users';
                 connection.query(sqlUsers, (error, users) => {
                     if (error) {
-// Handle error
+                        // Handle error
                         res.send('Error retrieving users');
                     } else {
-// Render the admin page with the orders and users data
-                        res.render('admin', {user, orders, users});
+                        // Perform linear optimization calculation for each order
+                        const results = orders.map((order) => {
+                            // Define the problem
+                            const model = {
+                                // Define the variables
+                                variables: {
+                                    x: {
+                                        // Set the variable to be non-negative (greater than or equal to 0)
+                                        lowerBound: 0
+                                    },
+                                    y: {
+                                        lowerBound: 0
+                                    }
+                                },
+                                // Define the constraints
+                                constraints: {
+                                    // Set a constraint that x + y <= 10
+                                    constraint1: {
+                                        x: 1,
+                                        y: 1,
+                                        upperBound: order.book_quantity
+                                    }
+                                },
+                                // Define the objective function to maximize
+                                objective: {
+                                    // Maximize 3x + 2y
+                                    coefficient: {
+                                        x: 3,
+                                        y: 2
+                                    },
+                                    // The objective function is to maximize
+                                    maximize: true
+                                }
+                            };
+
+                            // Solve the problem
+                            const result = solver.Solve(model);
+
+                            // Return the result
+                            return result;
+                        });
+
+                        // Render the admin page with the orders, users, and optimization results data
+                        res.render('admin', {user, orders, users, results});
                     }
                 });
             }
         });
     } else {
-// Redirect the user to a different page or show an error message
+        // Redirect the user to a different page or show an error message
         res.redirect('/'); // Redirect to the home page
     }
 });
