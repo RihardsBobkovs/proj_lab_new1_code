@@ -221,25 +221,25 @@ app.post('/orders', (req, res) => {
 
 // Set base price based on page amount
     if (pageAmount <= 100) {
-        price = pageAmount * 0.1 * bookQuantity;
+        price = pageAmount * 0.7 * bookQuantity;
     } else if (pageAmount <= 200) {
-        price = pageAmount * 0.09 * bookQuantity;
+        price = pageAmount * 0.06 * bookQuantity;
     } else {
-        price = pageAmount * 0.08 * bookQuantity;
+        price = pageAmount * 0.05 * bookQuantity;
     }
 
 // Add additional cost for hard cover book
     if (bookCover === "hard_cover") {
-        price += 10 * bookQuantity;
+        price += 6 * bookQuantity;
     }
 
     if (bookCover === "soft_cover") {
-        price += 6 * bookQuantity;
+        price += 3 * bookQuantity;
     }
 
 // Add additional cost for coated book paper
     if (paperType === "coated_book_paper") {
-        price += 0.2 * pageAmount;
+        price += 0.07 * pageAmount;
     }
 
 
