@@ -459,3 +459,34 @@ h2::after {
     background-color: #b0624f;
     text-align: center;
 }
+
+.contact-card {
+    border: 2px solid #7289da;
+    padding: 20px;
+    border-radius: 5px;
+    width: 350px;
+    height: 160px;
+    margin: auto;
+    margin-top: 40px;
+    background-color: #b0624f;
+}
+
+.contact-card h3 {
+    margin-top: 0;
+    font-family: "Oswald", sans-serif;
+    background-color: #b0624f;
+    font-size: 22px;
+}
+
+.contact-info {
+    font-weight: bold;
+    font-family: "Oswald", sans-serif;
+    background-color: #b0624f;
+    font-size: 18px;
+}
+
+p {
+    font-family: "Oswald", sans-serif;
+    background-color: #b0624f;
+    font-size: 16px;
+}
