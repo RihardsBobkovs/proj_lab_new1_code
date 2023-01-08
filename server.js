@@ -402,10 +402,10 @@ app.get('/admin', checkAuthenticated, (req, res) => {
                             // Solve the problem
                             const result = solver.Solve(model);
 
-                            if (result.feasible) {
+                            if (result.feasible === true) {
                                 return `${result.feasible ? 'Feasible' : 'Not Feasible'}: ${bookQuantity} books, ${pageAmount} pages`;
-                                
-                            } else {
+
+                            } else if (result.feasible === false) {
                                 return 'Not Feasible';
                             }
                         });
