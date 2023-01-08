@@ -42,7 +42,7 @@
         <th>Feasibility</th>
         <th>Action</th>
     </tr>
-    <% orders.forEach((order) => { %>
+    <% orders.forEach((order, i) => { %>
         <tr>
             <td><%= order.id %></td>
             <td><%= order.user_id %></td>
@@ -56,13 +56,7 @@
             <td><%= order.page_amount %></td>
             <td><%= order.book_quantity %></td>
             <td><%= order.price %></td>
-            <td>
-                <% if (results.feasible) { %>
-                    Feasible
-                <% } else { %>
-                    Not feasible
-                <% } %>
-            </td>
+            <td><%= results[i] %></td>
             <td>
                 <form action="/admin/cancel" method="POST">
                     <input type="hidden" name="orderId" value="<%= order.id %>">

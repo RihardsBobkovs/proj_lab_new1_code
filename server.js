@@ -377,46 +377,31 @@ app.get('/admin', checkAuthenticated, (req, res) => {
                         // Handle error
                         res.send('Error retrieving users');
                     } else {
-                        // Perform linear optimization calculation for each order
-                        const results = orders.map((order) => {
+
+                        const results = orders.map(order => {
+
+
                             // Define the problem
                             const model = {
-                                // Define the variables
-                                variables: {
-                                    x: {
-                                        // Set the variable to be non-negative (greater than or equal to 0)
-                                        lowerBound: 0
-                                    },
-                                    y: {
-                                        lowerBound: 0
-                                    }
-                                },
-                                // Define the constraints
+                                optimize: 'bookq',
+                                opType: 'max',
                                 constraints: {
-                                    // Set a constraint that x + y <= 10
-                                    constraint1: {
-                                        x: 1,
-                                        y: 1,
-                                        upperBound: order.book_quantity
-                                    }
+                                    bookq: {'max': 500},
+                                    pages: {'max': 850}
                                 },
-                                // Define the objective function to maximize
-                                objective: {
-                                    // Maximize 3x + 2y
-                                    coefficient: {
-                                        x: 3,
-                                        y: 2
-                                    },
-                                    // The objective function is to maximize
-                                    maximize: true
+                                variables: {
+                                    'gramata': {bookq: order.book_quantity, pages: order.page_amount}
                                 }
                             };
 
                             // Solve the problem
                             const result = solver.Solve(model);
 
-                            // Return the result
-                            return result;
+                            if (result.feasible) {
+                                return 'Feasible';
+                            } else {
+                                return 'Not Feasible';
+                            }
                         });
 
                         // Render the admin page with the orders, users, and optimization results data
