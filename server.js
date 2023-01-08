@@ -378,27 +378,33 @@ app.get('/admin', checkAuthenticated, (req, res) => {
                         res.send('Error retrieving users');
                     } else {
 
+                        const model = {
+                            optimize: 'book_quantity',
+                            opType: 'min',
+                            constraints: {
+                                book_quantity: {'min': 0, 'max': 400},
+                                page_amount: {'min': 0, 'max': 1000}
+                            },
+                            variables: {
+                                book_quantity: {type: 'integer', min: 0, max: 400},
+                                page_amount: {type: 'integer', min: 0, max: 1000}
+                            }
+                        };
+
                         const results = orders.map(order => {
+                            const bookQuantity = parseInt(order.book_quantity);
+                            const pageAmount = parseInt(order.page_amount);
 
-
-                            // Define the problem
-                            const model = {
-                                optimize: 'bookq',
-                                opType: 'max',
-                                constraints: {
-                                    bookq: {'max': 500},
-                                    pages: {'max': 850}
-                                },
-                                variables: {
-                                    'gramata': {bookq: order.book_quantity, pages: order.page_amount}
-                                }
-                            };
+                            // Set the values of the decision variables
+                            model.variables.book_quantity.value = bookQuantity;
+                            model.variables.page_amount.value = pageAmount;
 
                             // Solve the problem
                             const result = solver.Solve(model);
 
                             if (result.feasible) {
-                                return 'Feasible';
+                                return `${result.feasible ? 'Feasible' : 'Not Feasible'}: ${bookQuantity} books, ${pageAmount} pages`;
+                                
                             } else {
                                 return 'Not Feasible';
                             }
