@@ -126,16 +126,16 @@ app.post('/login', (req, res, next) => {
             return next(err)
         }
         if (!user) {
-            // Set the error message as a flash message
+
             req.flash('error', info.message)
-            // Redirect the user back to the login page
+
             return res.redirect('/login')
         }
         req.login(user, err => {
             if (err) {
                 return next(err)
             }
-            // Redirect the user to the home page upon successful login
+
             return res.redirect('/')
         })
     })(req, res, next)
@@ -151,7 +151,7 @@ app.post('/register', (req, res) => {
 
     bcrypt.hash(password, 10, (error, hash) => {
         if (error) {
-            // Handle error
+
             return res.render('register', {message: 'Error hashing password'});
         }
 
@@ -211,7 +211,7 @@ app.get('/about', checkAuthenticated, (req, res) => {
 
 
 app.post('/orders', (req, res) => {
-    // handle form submission here
+
 
     const pageAmount = req.body.page_amount;
     const bookQuantity = req.body.book_quantity;
@@ -220,7 +220,7 @@ app.post('/orders', (req, res) => {
 
     let price = 0;
 
-// Set base price based on page amount
+
     if (pageAmount <= 100) {
         price = pageAmount * 0.07 * bookQuantity;
     } else if (pageAmount <= 200) {
@@ -229,7 +229,7 @@ app.post('/orders', (req, res) => {
         price = pageAmount * 0.05 * bookQuantity;
     }
 
-// Add additional cost for hard cover book
+
     if (bookCover === "hard_cover") {
         price += 6 * bookQuantity;
     }
@@ -380,14 +380,14 @@ app.get('/admin', checkAuthenticated, (req, res) => {
 
                         const model = {
                             optimize: 'book_quantity',
-                            opType: 'min',
+                            opType: 'max',
                             constraints: {
-                                book_quantity: {'min': 0, 'max': 400},
-                                page_amount: {'min': 0, 'max': 1000}
+                                book_quantity: {type: 'integer', 'min': 0, 'max': 400},
+                                page_amount: {type: 'integer', 'min': 0, 'max': 1000}
                             },
                             variables: {
-                                book_quantity: {type: 'integer', min: 0, max: 400},
-                                page_amount: {type: 'integer', min: 0, max: 1000}
+                                book_quantity: {type: 'integer', 'min': 0, 'max': 400},
+                                page_amount: {type: 'integer', 'min': 0, 'max': 1000}
                             }
                         };
 
